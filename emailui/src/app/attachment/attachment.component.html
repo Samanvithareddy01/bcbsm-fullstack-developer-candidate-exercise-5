@@ -1,0 +1,9 @@
+
+<input type="text" placeholder="email"  name="emailId" [(ngModel)]="emailId">
+<input type="text" placeholder="Recieptiant Email" name="recieptiantId"  [(ngModel)]="recieptiantId">
+
+
+<input type="file" #fileInput (change)="onFileSelected($event)">
+
+<button (click)="uploadFile()">Upload File</button>
+
