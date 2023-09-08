@@ -8,6 +8,7 @@ import { catchError, tap } from 'rxjs';
 })
 export class AuthService {
   private isAuthenticated: boolean = false;
+  private user = '';
 
   /**
    *
@@ -21,9 +22,13 @@ export class AuthService {
     //   return true;
     // }
     // return false;
-    return this.http.post('{Add URL}', {userName: username, password: pwd})
+    return this.http.post('http://localhost:8080/api/login', 
+    {userName: username, password: pwd}, {headers: {
+      'Cookie': 'JSESSIONID=5DD47D0C2D3030B63A3C773D7DB38C29'
+    }})
     .pipe(tap(v => {
         this.isAuthenticated = true;
+        this.user = username;
     }));
   }
 
@@ -33,5 +38,9 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return this.isAuthenticated;
+  }
+
+  get userInfo() {
+    return this.user;
   }
 }
